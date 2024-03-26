@@ -8,6 +8,8 @@ import com.intuit.fuzzymatcher.function.PreProcessFunction;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
 import com.opencsv.CSVWriter;
+
+import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -25,7 +27,6 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
-import org.hamcrest.CoreMatchers;
 
 import static com.intuit.fuzzymatcher.domain.ElementType.*;
 
@@ -51,6 +52,7 @@ public class MatchServiceTest {
 
     @Test
     public void itShouldApplyMatchByDocId() {
+        
         String[][] input = {
                 {"1", "Steven Wilson", "45th Avenue 5th st."},
                 {"2", "John Doe", "546 freeman ave"},
