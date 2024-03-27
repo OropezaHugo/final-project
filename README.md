@@ -3,6 +3,8 @@
 2. Review which matching algorithm is implemented.
    
 a) Are there any other matchings that can be implemented?
+
+- the Path no tokenizer was implemented but a new type was added for the above purpose
 - One of these would be,Matching based on edit distances,
 
 b) If so, what will be the idea, and what will be its use?
