@@ -21,12 +21,41 @@ public class PreProcessFunctionTest {
     }
 
     @Test
+    public void itShouldRemoveSlashes(){
+        String value = "fundacion/special";
+        Element element = new Element.Builder().setType(PATH).setValue(value).createElement();
+        Assert.assertEquals("fundacion special", element.getPreProcessedValue());
+    }
+
+    @Test
+    public void itShouldRemoveSpecialCharactersOnEverySubPath(){
+        String value = "fundacion/special.txt%$#&";
+        Element element = new Element.Builder().setType(PATH).setValue(value).createElement();
+        Assert.assertEquals("fundacion specialtxt", element.getPreProcessedValue());
+    }
+
+    @Test
+    public void itShouldRemoveAdditionalCharactersIfItIsADuplicatedFileName(){
+        String value = "fundacion/special(1).txt";
+        Element element = new Element.Builder().setType(PATH).setValue(value).createElement();
+        Assert.assertEquals("fundacion specialtxt", element.getPreProcessedValue());
+    }
+
+    @Test
+    public void itShouldRemoveIfNumberOfDuplicatedFileContainsMoreThanTwoDigits(){
+        String value = "fundacion/special(123).txt";
+        Element element = new Element.Builder().setType(PATH).setValue(value).createElement();
+        Assert.assertEquals("fundacion specialtxt", element.getPreProcessedValue());
+    }
+
+    @Test
     public void itShouldPreprocessAddress(){
         String value = "123 XYZ Ltd st, TX";
         Element element = new Element.Builder().setType(ADDRESS).setValue(value).createElement();
         Assert.assertEquals("123 xyz ltd street texas", element.getPreProcessedValue());
     }
 
+   
     @Test
     public void itShouldCustomPreprocessAddress(){
         String value = "123_XYZ_Ltd_st, TX";
