@@ -2,6 +2,7 @@
 1. tokenizer for Paths and phone numbers
 a) there is a tokenizer which can be used for the paths so is not necessary
    to implement a new one.
+b) It can recognize numbers I did the following, it takes an input string str and returns a string containing the phone numbers found in the input string, with the hyphens removed.  
    
 
 2. Review which matching algorithm is implemented.
