@@ -132,4 +132,33 @@ public class PreProcessFunctionTest {
         Date result = (Date) PreProcessFunction.none().apply(input);
         Assert.assertEquals(input, result);
     }
+
+
+    @Test
+    public void itShouldRecognizePhoneNumber_Success() {
+        String value = "My phone number is 123-456-7890. Call me!";
+        String result = PreProcessFunction.phoneNumberRecognition().apply(value);
+        Assert.assertEquals("1234567890", result);
+    }
+
+    @Test
+    public void itShouldRecognizeMultiplePhoneNumbers_Success() {
+        String value = "Contact me at 123-456-7890 or 987-654-3210.";
+        String result = PreProcessFunction.phoneNumberRecognition().apply(value);
+        Assert.assertEquals("1234567890 9876543210", result);
+    }
+
+    @Test
+    public void itShouldHandleNoPhoneNumberFound_Success() {
+        String value = "No phone number in this text.";
+        String result = PreProcessFunction.phoneNumberRecognition().apply(value);
+        Assert.assertEquals("", result);
+    }
+
+    @Test
+    public void itShouldHandlePhoneNumberAtBeginningAndEnd_Success() {
+        String value = "123-456-7890 is my number. Call me at 987-654-3210.";
+        String result = PreProcessFunction.phoneNumberRecognition().apply(value);
+        Assert.assertEquals("1234567890 9876543210", result);
+    }
 }

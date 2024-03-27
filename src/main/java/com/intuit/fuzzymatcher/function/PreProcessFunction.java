@@ -169,4 +169,23 @@ public class PreProcessFunction<T>{
     public static Function none() {
         return obj -> obj;
     }
+
+        /**
+     * Recognizes phone numbers in a text string.
+     * This function searches for and returns all phone numbers found in the string.
+     *
+     * @return The function to recognize telephone numbers
+     */
+    public static Function<String, String> phoneNumberRecognition() {
+        return (str) -> {
+            StringBuilder result = new StringBuilder();
+            Pattern pattern = Pattern.compile("\\d{3}[.-]?\\d{3}[.-]?\\d{4}");
+            Matcher matcher = pattern.matcher(str);
+            while (matcher.find()) {
+                result.append(matcher.group().replaceAll("[^\\d]", ""));
+                result.append(" ");
+            }
+            return result.toString().trim();
+        };
+    }
 }

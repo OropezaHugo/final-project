@@ -23,6 +23,7 @@ public enum ElementType {
     NUMBER,
     DATE,
     PATH,
+    NUMBER_RECOGNITION,
     AGE;
 
     protected Function getPreProcessFunction() {
@@ -41,6 +42,8 @@ public enum ElementType {
             case NUMBER:
             case AGE:
                 return numberPreprocessing();
+            case NUMBER_RECOGNITION:
+                return phoneNumberRecognition();    
             default:
                 return none();
         }
