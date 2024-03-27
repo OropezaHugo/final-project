@@ -1,4 +1,8 @@
 # final-project
+1. tokenizer for Paths and phone numbers
+a) there is a tokenizer which can be used for the paths so is not necessary
+   to implement a new one.
+   
 
 2. Review which matching algorithm is implemented.
    
