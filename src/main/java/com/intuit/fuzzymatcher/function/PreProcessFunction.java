@@ -52,6 +52,24 @@ public class PreProcessFunction<T>{
     }
 
     /**
+     * removes all slash character '/' on string and replace it by a space
+     * 
+     * @return the function to perform pelaceSlashesBySpaces
+     */
+    public static Function<String,String> replaceSlashesBySpaces(){
+        return (str) -> str.replaceAll("/", " ");
+    }
+
+    /**
+     * removes all content between parentheses and also removes the parentheses
+     * 
+     * @return the funtion to perform deleteContentBetweenParentheses
+     */
+    public static Function<String,String> deleteContentBetweenParentheses(){
+        return (str) -> str.replaceAll("\\(.*?\\)","");
+    }
+
+    /**
      * Used for emails, remove everything after the '@' character
      *
      * @return the function to perform removeDomain
@@ -81,7 +99,9 @@ public class PreProcessFunction<T>{
      * @return the function to perform namePreprocessing
      */
     public static Function<String, String> namePreprocessing() {
-        return (str) -> removeTrailingNumber().andThen(removeSpecialChars()).andThen(nameNormalization()).apply(str);
+        return (str) -> removeTrailingNumber().andThen(replaceSlashesBySpaces()).
+                        andThen(deleteContentBetweenParentheses()).andThen(removeSpecialChars()).
+                        andThen(nameNormalization()).apply(str);
     }
 
     /**

@@ -12,6 +12,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import static com.intuit.fuzzymatcher.domain.ElementType.ADDRESS;
 import static com.intuit.fuzzymatcher.domain.ElementType.NAME;
+import static com.intuit.fuzzymatcher.domain.ElementType.PATH;
+import static org.junit.Assert.assertEquals;
 
 public class ElementMatchTest {
 
@@ -108,6 +110,45 @@ public class ElementMatchTest {
         Assert.assertEquals(1.0, matchSet.iterator().next().getResult(), 0.0);
     }
 
+    @Test
+    public void itShouldMatchTwoIdenticalAddresses(){
+        Element<String> element1 = getElement(PATH,"fundacion/rsds.txt");
+        Element<String> element2 = getElement(PATH,"fundacion/rsds.txt");
+
+        Set<Match<Element>> matchSet1 = elementMatch.matchElement(element1);
+        Assert.assertEquals(0, matchSet1.size());
+        
+        Set<Match<Element>> matchSet2 = elementMatch.matchElement(element2);
+        Assert.assertEquals(1, matchSet2.size());
+        Assert.assertEquals(1.0, matchSet2.iterator().next().getResult(), 0.0);
+    }
+
+    @Test
+    public void itShouldMatchIfOneOfTheFilesInPathIsADuplicatedOfTheAnother(){
+        Element<String> element1 = getElement(PATH,"fundacion/rsds.txt");
+        Element<String> element2 = getElement(PATH,"fundacion/rsds(1).txt");
+
+        Set<Match<Element>> matchSet1 = elementMatch.matchElement(element1);
+        Assert.assertEquals(0, matchSet1.size());
+        
+        Set<Match<Element>> matchSet2 = elementMatch.matchElement(element2);
+        Assert.assertEquals(1, matchSet2.size());
+        Assert.assertEquals(1.0, matchSet2.iterator().next().getResult(), 0.0);
+    }
+
+    @Test
+    public void itShouldReduceTheMatchResultIfPathsAreSimilarButNotIdentical(){
+        Element<String> element1 = getElement(PATH,"fundaciones/rsds.txt");
+        Element<String> element2 = getElement(PATH,"asapfundacion/rsds.txt");
+
+        Set<Match<Element>> matchSet1 = elementMatch.matchElement(element1);
+        Assert.assertEquals(0, matchSet1.size());
+        
+        Set<Match<Element>> matchSet2 = elementMatch.matchElement(element2);
+        Assert.assertEquals(1, matchSet2.size());
+        Assert.assertEquals(0.5, matchSet2.iterator().next().getResult(), 0.0);
+    }
+    
     private Element getElement(ElementType elementType, String value) {
         Element<String> element = new Element.Builder().setType(elementType)
                 .setValue(value).createElement();

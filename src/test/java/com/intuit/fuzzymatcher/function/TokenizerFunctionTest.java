@@ -142,11 +142,11 @@ public class TokenizerFunctionTest {
         Element elem = new Element.Builder().setType(PATH).setValue(path).createElement();
         Stream<Token<String>> tokenStream = wordTokenizer().apply(elem);
         List<Token<String>> tokens = tokenStream.collect(Collectors.toList());
+        Assert.assertEquals(3, tokens.size());
 
-        Assert.assertEquals(1, tokens.size());
-
-        Assert.assertEquals("fundacionmiproyectorsdstxt", tokens.get(0).getValue());
-
+        Assert.assertEquals("fundacion", tokens.get(0).getValue());
+        Assert.assertEquals("miproyecto", tokens.get(1).getValue());
+        Assert.assertEquals("rsdstxt", tokens.get(2).getValue());
     }
 
 
