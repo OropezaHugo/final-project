@@ -1,0 +1,44 @@
+Group 2:
+    Juan Carlos Hidalgo
+    Anghelo Leonardo Zambrana Quinteros
+    Gaston Gutierrez Condori
+    Hugo Andres Oropeza Villalpando
+
+1. User Data: (Person)
+    Name: Complete name, only 1 name and 1 lastname
+    IC(Identity Card Number): 8 digits
+    Phone Number: With country prefix and 8 dígits
+    Age (in years): 18 <= age <=100
+    Height (in meters): 1,10 m <= height <= 2,10 m
+    Civil Status (Single, Married, Divorced, Widowed)
+    Number of couples:(>= 0)
+Example: Paco Perez, 75253041, +552 57976777, 34, 1,65 m, Divorced, 5
+
+2. Item Data: (Melee and throwable weapons)
+    Name: 2 words maximum
+    Material: 1 word
+    Range (Large, Median o Short)
+    Damage points (over 100)
+    have handle(Boolean): it means that has a place to hold the weapon
+    is throwable (Boolean): it means that in the middle of a fight it is profitable or not to throw it
+    is sharp (Boolean): It means that cuts the skin easily when using it
+Example: Knife, Iron, Short, 20/100, True, True, True
+
+                    Loading Type
+            We will receive our data from .csv files
+
+3. Recommendation;
+Given a user X, return the top 5 similar users based on their information.
+    Age, Civil Status and Number of Couples
+Generate recommendations for a user based on their preferences or similarity with other users or the items acquired/consumed by the user.
+    We will use the Similarity option because we do not relate Users and Items by the Age, Height and Civil Status
+
+4 About the implementation
+1. Use the pre-processing and tokenization that already exists in the library and make sure to implement new ones. (Use at least two that already exist and two new ones.)
+    As the new tokenization we will implement the Edit Distance algorithm and the Long Common Sequence.
+    As the new preprocessing we will implement one for boolean and the Enums of the new Item and User attributes.
+2. Implement one of the matching algorithms you mentioned in the previous task.(Compare the algorithm implemented with the one already in the library.)
+a) Compare score and time complexity.
+
+
+
