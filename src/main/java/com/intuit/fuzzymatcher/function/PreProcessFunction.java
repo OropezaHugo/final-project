@@ -188,4 +188,16 @@ public class PreProcessFunction<T>{
             return result.toString().trim();
         };
     }
+
+    public static Function boolPreprocessing() {
+        return (obj) ->  {
+            if (obj instanceof String) {
+                String str = obj.toString();
+                return Boolean.parseBoolean(str);
+            } else {
+                return none().apply(obj);
+            }
+
+        };
+    }
 }

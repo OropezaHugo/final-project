@@ -161,4 +161,18 @@ public class PreProcessFunctionTest {
         String result = PreProcessFunction.phoneNumberRecognition().apply(value);
         Assert.assertEquals("1234567890 9876543210", result);
     }
+
+    @Test
+    public void itShouldHandleBooleanTextValueTrueAndEnd_Success() {
+        String value = "True";
+        Object result = PreProcessFunction.boolPreprocessing().apply(value);
+        Assert.assertEquals(true, result);
+    }
+
+    @Test
+    public void itShouldHandleBooleanTextValueFalseAndEnd_Success() {
+        String value = "False";
+        Object result = PreProcessFunction.boolPreprocessing().apply(value);
+        Assert.assertEquals(false, result);
+    }
 }
