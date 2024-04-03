@@ -23,6 +23,7 @@ public enum ElementType {
     NUMBER,
     DATE,
     PATH,
+    NUMBER_RECOGNITION,
     AGE,
     BOOLEAN;
 
@@ -44,6 +45,8 @@ public enum ElementType {
             case NUMBER:
             case AGE:
                 return numberPreprocessing();
+            case NUMBER_RECOGNITION:
+                return phoneNumberRecognition();
             case BOOLEAN: 
                 return boolPreprocessing();
             default:
