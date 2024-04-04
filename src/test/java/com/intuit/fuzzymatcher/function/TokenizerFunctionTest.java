@@ -1,6 +1,7 @@
 package com.intuit.fuzzymatcher.function;
 
 import com.intuit.fuzzymatcher.domain.Element;
+import com.intuit.fuzzymatcher.domain.ElementType;
 import com.intuit.fuzzymatcher.domain.Token;
 import org.junit.Assert;
 import org.junit.Test;
@@ -150,6 +151,7 @@ public class TokenizerFunctionTest {
         Assert.assertEquals("rsdstxt", tokens.get(2).getValue());
     }
 
+
     @Test
     public void itShouldTokenizeSingleEnumValue() {
 
@@ -205,8 +207,6 @@ public class TokenizerFunctionTest {
         Assert.assertEquals(1, tokens.size());
         Assert.assertEquals(Integer.valueOf(Integer.MAX_VALUE), tokens.get(0).getValue());
     }
-
-
 
 
 }

@@ -1,6 +1,9 @@
 package com.intuit.fuzzymatcher.function;
 
+import com.intuit.fuzzymatcher.domain.CivilStatus;
 import com.intuit.fuzzymatcher.domain.Element;
+import com.intuit.fuzzymatcher.domain.ItemRange;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -11,6 +14,7 @@ import java.util.Date;
 import java.util.function.Function;
 
 import static com.intuit.fuzzymatcher.domain.ElementType.*;
+import static org.junit.Assert.assertEquals;
 
 public class PreProcessFunctionTest {
     @Test
@@ -174,5 +178,47 @@ public class PreProcessFunctionTest {
         String value = "False";
         Object result = PreProcessFunction.boolPreprocessing().apply(value);
         Assert.assertEquals(false, result);
+    }
+
+    @Test
+    public void itShouldHandleRangeItemValue(){
+        String rangeItem = "short";
+        Object result = PreProcessFunction.itemRangeRecognition().apply(rangeItem);
+        assertEquals(ItemRange.SHORT.name(), result);
+
+        rangeItem = "medium";
+        result = PreProcessFunction.itemRangeRecognition().apply(rangeItem);
+        assertEquals(ItemRange.MEDIUM.name(), result);
+
+        rangeItem = "long";
+        result = PreProcessFunction.itemRangeRecognition().apply(rangeItem);
+        assertEquals(ItemRange.LONG.name(), result);
+
+        rangeItem = "adfsdgbsd";
+        result = PreProcessFunction.itemRangeRecognition().apply(rangeItem);
+        assertEquals(ItemRange.SHORT.name(), result);
+    }
+
+    @Test
+    public void itShouldHandleCivilStateValue(){
+        String civilStatus = "single";
+        Object result = PreProcessFunction.civilStateRecognition().apply(civilStatus);
+        assertEquals(CivilStatus.SINGLE.name(), result);
+
+        civilStatus = "married";
+        result = PreProcessFunction.civilStateRecognition().apply(civilStatus);
+        assertEquals(CivilStatus.MARRIED.name(), result);
+
+        civilStatus = "divorced";
+        result = PreProcessFunction.civilStateRecognition().apply(civilStatus);
+        assertEquals(CivilStatus.DIVORCED.name(), result);
+
+        civilStatus = "widowed";
+        result = PreProcessFunction.civilStateRecognition().apply(civilStatus);
+        assertEquals(CivilStatus.WIDOWED.name(), result);
+
+        civilStatus = "asfasfsa";
+        result = PreProcessFunction.civilStateRecognition().apply(civilStatus);
+        assertEquals(CivilStatus.SINGLE.name(), result);
     }
 }

@@ -24,7 +24,10 @@ public enum ElementType {
     DATE,
     PATH,
     NUMBER_RECOGNITION,
+    tokenizationEnum,
     SINGLEENUM,
+    CIVIL_STATE,
+    ITEM_RANGE,
     AGE;
 
     protected Function getPreProcessFunction() {
@@ -44,7 +47,11 @@ public enum ElementType {
             case AGE:
                 return numberPreprocessing();
             case NUMBER_RECOGNITION:
-                return phoneNumberRecognition();    
+                return phoneNumberRecognition();
+            case CIVIL_STATE:
+                return civilStateRecognition();  
+            case ITEM_RANGE:
+                return itemRangeRecognition();  
             default:
                 return none();
         }
