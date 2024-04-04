@@ -24,13 +24,16 @@ public enum ElementType {
     DATE,
     PATH,
     NUMBER_RECOGNITION,
+    BOOLEAN,
     CIVIL_STATE,
     ITEM_RANGE,
     AGE;
 
+    
     protected Function getPreProcessFunction() {
         switch (this) {
             case NAME:
+                return namePreprocessing();
             case PATH:
                 return namePreprocessing();
             case TEXT:
@@ -46,6 +49,8 @@ public enum ElementType {
                 return numberPreprocessing();
             case NUMBER_RECOGNITION:
                 return phoneNumberRecognition();
+            case BOOLEAN: 
+                return boolPreprocessing();
             case CIVIL_STATE:
                 return civilStateRecognition();  
             case ITEM_RANGE:
@@ -68,6 +73,8 @@ public enum ElementType {
                 return triGramTokenizer();
             case PHONE:
                 return decaGramTokenizer();
+            case BOOLEAN: 
+                return booleanToNumberTokenizer();
             default:
                 return valueTokenizer();
         }
