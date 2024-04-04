@@ -75,4 +75,12 @@ public class TokenizerFunction {
     }
 
 
+
+    public static Function<Element<Boolean>, Stream<Token<Integer>>> booleanToNumberTokenizer() {
+        return (element) -> {
+            Integer tokenValue = element.getPreProcessedValue() ? 1 : 0;
+            return Stream.of(new Token<>(tokenValue, element));
+        };
+    }
+
 }

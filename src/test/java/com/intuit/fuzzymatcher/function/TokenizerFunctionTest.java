@@ -137,6 +137,21 @@ public class TokenizerFunctionTest {
         Assert.assertEquals(3, customResults.size());
         Assert.assertEquals("123", customResults.get(0).getValue());
     }
+    
+    @Test
+    public void itShouldConvertBooleanToNumber() {
+        boolean booleanValue = true;
+        
+        Element<Boolean> booleanElement = new Element.Builder()
+                .setType(BOOLEAN) 
+                .setValue(booleanValue)
+                .createElement();
+        Stream<Token<Integer>> tokens = booleanToNumberTokenizer().apply(booleanElement);
+        List<Token<Integer>> tokenList = tokens.collect(Collectors.toList());
+        Assert.assertEquals(1, tokenList.size());
+        int expectedValue = booleanValue ? 1 : 0;
+        Assert.assertEquals(expectedValue, (int) tokenList.get(0).getValue());
+    }
 
     @Test
     public void itShouldGetWordTokenizerForPath() {
@@ -149,6 +164,7 @@ public class TokenizerFunctionTest {
         Assert.assertEquals("fundacion", tokens.get(0).getValue());
         Assert.assertEquals("miproyecto", tokens.get(1).getValue());
         Assert.assertEquals("rsdstxt", tokens.get(2).getValue());
+
     }
 
 
@@ -210,3 +226,4 @@ public class TokenizerFunctionTest {
 
 
 }
+ 
