@@ -24,6 +24,7 @@ public enum ElementType {
     DATE,
     PATH,
     NUMBER_RECOGNITION,
+    SINGLEENUM,
     AGE;
 
     protected Function getPreProcessFunction() {
@@ -62,6 +63,8 @@ public enum ElementType {
                 return triGramTokenizer();
             case PHONE:
                 return decaGramTokenizer();
+            case SINGLEENUM:
+                return singleEnumTokenizer();
             default:
                 return valueTokenizer();
         }
