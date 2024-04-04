@@ -25,7 +25,7 @@ public enum ElementType {
     PATH,
     NUMBER_RECOGNITION,
     tokenizationEnum,
-    SINGLEENUM,
+    CIVILENUM,
     BOOLEAN,
     CIVIL_STATE,
     ITEM_RANGE,
@@ -76,7 +76,7 @@ public enum ElementType {
             case PHONE:
                 return decaGramTokenizer();
 
-            case SINGLEENUM:
+            case CIVILENUM:
                 return singleEnumTokenizer();
 
             case BOOLEAN: 
