@@ -39,4 +39,17 @@ public class UserMatcherTest {
         Assert.assertTrue(similarUsers.isEmpty());
     }
 
+    @Test
+    public void testGenerateTop5UserNames() {
+        ComparisonData comparisonData = new ComparisonData(30, "Single", 0);
+        List<String> top5UserNames = userMatcher.generateTop5UserNames(comparisonData);
+        Assert.assertNotNull(top5UserNames);
+        Assert.assertTrue(top5UserNames.size() <= 5);
+        for (String userName : top5UserNames) {
+            Assert.assertNotNull(userName);
+            Assert.assertFalse(userName.isEmpty());
+        }
+    }
+
+
 }
