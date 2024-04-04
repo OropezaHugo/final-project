@@ -5,6 +5,7 @@ import com.intuit.fuzzymatcher.domain.ElementType;
 import com.intuit.fuzzymatcher.domain.Token;
 import org.junit.Assert;
 import org.junit.Test;
+import com.intuit.fuzzymatcher.domain.ElementType;
 
 import java.util.Arrays;
 import java.util.List;
@@ -165,5 +166,64 @@ public class TokenizerFunctionTest {
         Assert.assertEquals("rsdstxt", tokens.get(2).getValue());
 
     }
+
+
+    @Test
+    public void itShouldTokenizeSingleEnumValue() {
+
+        Element<Integer> elem = new Element.Builder<Integer>().setType(ElementType.TEXT).setValue(5).createElement();
+
+
+        Stream<Token<Integer>> tokenStream = TokenizerFunction.singleEnumTokenizer().apply(elem);
+        List<Token<Integer>> tokens = tokenStream.collect(Collectors.toList());
+
+
+        Assert.assertEquals(1, tokens.size());
+        Assert.assertEquals(Integer.valueOf(5), tokens.get(0).getValue());
+    }
+
+    @Test
+    public void itShouldTokenizeSingleEnumValueForZero() {
+
+        Element<Integer> elem = new Element.Builder<Integer>().setType(ElementType.TEXT).setValue(0).createElement();
+
+
+        Stream<Token<Integer>> tokenStream = TokenizerFunction.singleEnumTokenizer().apply(elem);
+        List<Token<Integer>> tokens = tokenStream.collect(Collectors.toList());
+
+
+        Assert.assertEquals(1, tokens.size());
+        Assert.assertEquals(Integer.valueOf(0), tokens.get(0).getValue());
+    }
+
+    @Test
+    public void itShouldTokenizeSingleEnumValueForNegative() {
+
+        Element<Integer> elem = new Element.Builder<Integer>().setType(ElementType.TEXT).setValue(-10).createElement();
+
+
+        Stream<Token<Integer>> tokenStream = TokenizerFunction.singleEnumTokenizer().apply(elem);
+        List<Token<Integer>> tokens = tokenStream.collect(Collectors.toList());
+
+
+        Assert.assertEquals(1, tokens.size());
+        Assert.assertEquals(Integer.valueOf(-10), tokens.get(0).getValue());
+    }
+
+    @Test
+    public void itShouldTokenizeSingleEnumValueForMaxInteger() {
+
+        Element<Integer> elem = new Element.Builder<Integer>().setType(ElementType.TEXT).setValue(Integer.MAX_VALUE).createElement();
+
+
+        Stream<Token<Integer>> tokenStream = TokenizerFunction.singleEnumTokenizer().apply(elem);
+        List<Token<Integer>> tokens = tokenStream.collect(Collectors.toList());
+
+
+        Assert.assertEquals(1, tokens.size());
+        Assert.assertEquals(Integer.valueOf(Integer.MAX_VALUE), tokens.get(0).getValue());
+    }
+
+
 }
  

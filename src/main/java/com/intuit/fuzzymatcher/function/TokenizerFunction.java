@@ -69,10 +69,18 @@ public class TokenizerFunction {
         return element -> Arrays.stream(tokenizers).flatMap(fun -> fun.apply(element));
     }
 
+    // Tokenizer for Enum SINGLE
+    public static Function<Element<Integer>, Stream<Token<Integer>>> singleEnumTokenizer() {
+        return (element) -> Stream.of(new Token<>(element.getValue(), element));
+    }
+
+
+
     public static Function<Element<Boolean>, Stream<Token<Integer>>> booleanToNumberTokenizer() {
         return (element) -> {
             Integer tokenValue = element.getPreProcessedValue() ? 1 : 0;
             return Stream.of(new Token<>(tokenValue, element));
         };
     }
+
 }
