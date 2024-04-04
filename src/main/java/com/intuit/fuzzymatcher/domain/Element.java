@@ -98,7 +98,7 @@ public class Element<T> implements Matchable {
                 // Default String pre-processing
                 Function<String, String> preProcessingFunc = (Function<String, String>) getPreProcessFunction();
                 setPreProcessedValue((T) preProcessingFunc.andThen(trim()).andThen(toLowerCase()).apply((String) this.value));
-            } else {
+            }else {
                 setPreProcessedValue(getPreProcessFunction().apply(this.value));
             }
         }
