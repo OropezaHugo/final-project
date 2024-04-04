@@ -1,6 +1,7 @@
 package com.intuit.fuzzymatcher.function;
 
 import com.intuit.fuzzymatcher.domain.Element;
+import com.intuit.fuzzymatcher.domain.ElementType;
 import com.intuit.fuzzymatcher.domain.Token;
 import org.junit.Assert;
 import org.junit.Test;
@@ -148,6 +149,4 @@ public class TokenizerFunctionTest {
         Assert.assertEquals("miproyecto", tokens.get(1).getValue());
         Assert.assertEquals("rsdstxt", tokens.get(2).getValue());
     }
-
-
 }

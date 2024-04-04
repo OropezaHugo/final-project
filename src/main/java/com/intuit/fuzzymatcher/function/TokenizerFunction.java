@@ -1,10 +1,13 @@
 package com.intuit.fuzzymatcher.function;
 
 import com.intuit.fuzzymatcher.domain.Element;
+import com.intuit.fuzzymatcher.domain.ItemRange;
 import com.intuit.fuzzymatcher.domain.Token;
 import com.intuit.fuzzymatcher.exception.MatchException;
 import com.intuit.fuzzymatcher.util.Utils;
 import org.apache.commons.codec.language.Soundex;
+
+import static com.intuit.fuzzymatcher.domain.ElementType.NAME;
 
 import java.util.Arrays;
 import java.util.function.Function;
@@ -49,7 +52,6 @@ public class TokenizerFunction {
     public static Function<Element<String>, Stream<Token<String>>> decaGramTokenizer() {
         return (element) -> getNGramTokens(10, element);
     }
-
 
     public static Stream<Token<String>> getNGramTokens(int size, Element element) {
         Object elementValue = element.getPreProcessedValue();

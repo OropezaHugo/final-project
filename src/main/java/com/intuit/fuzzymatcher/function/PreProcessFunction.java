@@ -1,6 +1,8 @@
 package com.intuit.fuzzymatcher.function;
 
 import com.intuit.fuzzymatcher.component.Dictionary;
+import com.intuit.fuzzymatcher.domain.CivilStatus;
+import com.intuit.fuzzymatcher.domain.ItemRange;
 import com.intuit.fuzzymatcher.util.Utils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -186,6 +188,49 @@ public class PreProcessFunction<T>{
                 result.append(" ");
             }
             return result.toString().trim();
+        };
+    }
+
+    public static Function<String,String> civilStateRecognition(){
+        return (str) ->{
+            String cs;
+            switch (str) {
+                case "divorced":
+                    cs = CivilStatus.DIVORCED.name();
+                    break;
+                case "married":
+                    cs = CivilStatus.MARRIED.name();
+                    break;
+                case "single":
+                    cs = CivilStatus.SINGLE.name();
+                    break;
+                case "widowed":
+                    cs = CivilStatus.WIDOWED.name();
+                    break;
+                default:
+                    cs = CivilStatus.SINGLE.name();
+            }
+            return cs;
+        };
+    }
+
+    public static Function<String,String> itemRangeRecognition(){
+        return (str) -> {
+            String ir;
+            switch (str) {
+                case "short":
+                    ir = ItemRange.SHORT.name();
+                    break;
+                case "medium":
+                    ir = ItemRange.MEDIUM.name();
+                    break;
+                case "long":
+                    ir = ItemRange.LONG.name();
+                    break;
+                default:
+                    ir = ItemRange.SHORT.name();
+            }
+            return ir;
         };
     }
 
