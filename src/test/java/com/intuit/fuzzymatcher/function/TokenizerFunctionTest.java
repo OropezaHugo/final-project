@@ -1,6 +1,7 @@
 package com.intuit.fuzzymatcher.function;
 
 import com.intuit.fuzzymatcher.domain.Element;
+import com.intuit.fuzzymatcher.domain.ElementType;
 import com.intuit.fuzzymatcher.domain.Token;
 import org.junit.Assert;
 import org.junit.Test;
@@ -165,3 +166,4 @@ public class TokenizerFunctionTest {
 
     }
 }
+ 

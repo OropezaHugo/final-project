@@ -24,8 +24,10 @@ public enum ElementType {
     DATE,
     PATH,
     NUMBER_RECOGNITION,
-    AGE,
-    BOOLEAN;
+    BOOLEAN,
+    CIVIL_STATE,
+    ITEM_RANGE,
+    AGE;
 
     
     protected Function getPreProcessFunction() {
@@ -49,6 +51,10 @@ public enum ElementType {
                 return phoneNumberRecognition();
             case BOOLEAN: 
                 return boolPreprocessing();
+            case CIVIL_STATE:
+                return civilStateRecognition();  
+            case ITEM_RANGE:
+                return itemRangeRecognition();  
             default:
                 return none();
         }

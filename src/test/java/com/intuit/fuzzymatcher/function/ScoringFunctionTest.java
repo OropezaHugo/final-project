@@ -1,6 +1,7 @@
 package com.intuit.fuzzymatcher.function;
 
 import com.intuit.fuzzymatcher.domain.*;
+import com.intuit.fuzzymatcher.domain.Document;
 import org.junit.Assert;
 import org.junit.Test;
 

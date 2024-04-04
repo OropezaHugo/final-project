@@ -10,6 +10,7 @@ import com.opencsv.CSVReaderBuilder;
 import com.opencsv.CSVWriter;
 
 import org.hamcrest.CoreMatchers;
+import org.hamcrest.MatcherAssert;
 import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -152,7 +153,7 @@ public class MatchServiceTest {
                 .createDocument());
         Map<Document, List<Match<Document>>> result = matchService.applyMatch(inputData);
         Assert.assertEquals(2, result.size());
-        Assert.assertThat(result.entrySet().stream()
+        MatcherAssert.assertThat(result.entrySet().stream()
                         .map(entry -> entry.getKey().getKey()).collect(Collectors.toList()),
                 CoreMatchers.hasItems("1", "2"));
     }

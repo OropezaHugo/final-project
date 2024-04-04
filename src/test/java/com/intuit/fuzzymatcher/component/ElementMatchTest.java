@@ -3,6 +3,7 @@ package com.intuit.fuzzymatcher.component;
 import com.intuit.fuzzymatcher.domain.Document;
 import com.intuit.fuzzymatcher.domain.Element;
 import com.intuit.fuzzymatcher.domain.ElementType;
+import com.intuit.fuzzymatcher.domain.ItemRange;
 import com.intuit.fuzzymatcher.domain.Match;
 import org.junit.Assert;
 import org.junit.Test;
@@ -11,9 +12,10 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static com.intuit.fuzzymatcher.domain.ElementType.ADDRESS;
+import static com.intuit.fuzzymatcher.domain.ElementType.CIVIL_STATE;
+import static com.intuit.fuzzymatcher.domain.ElementType.ITEM_RANGE;
 import static com.intuit.fuzzymatcher.domain.ElementType.NAME;
 import static com.intuit.fuzzymatcher.domain.ElementType.PATH;
-import static org.junit.Assert.assertEquals;
 
 public class ElementMatchTest {
 
@@ -147,6 +149,56 @@ public class ElementMatchTest {
         Set<Match<Element>> matchSet2 = elementMatch.matchElement(element2);
         Assert.assertEquals(1, matchSet2.size());
         Assert.assertEquals(0.5, matchSet2.iterator().next().getResult(), 0.0);
+    }
+
+    @Test
+    public void itShouldMatchTwoEqualsItemRanges(){
+        Element<Enum> element1 = getElement(ITEM_RANGE,"short");
+        Element<Enum> element2 = getElement(ITEM_RANGE, "short");
+
+        Set<Match<Element>> matchSet1 = elementMatch.matchElement(element1);
+        Assert.assertEquals(0, matchSet1.size());
+
+        Set<Match<Element>> matchSet2 = elementMatch.matchElement(element2);
+        Assert.assertEquals(1, matchSet2.size());
+        Assert.assertEquals(1.0, matchSet2.iterator().next().getResult(), 0.0);
+    }
+
+    @Test
+    public void ItShouldNotMatchTwoDifferentItemRanges(){
+        Element<Enum> element1 = getElement(ITEM_RANGE,"short");
+        Element<Enum> element2 = getElement(ITEM_RANGE, "medium");
+
+        Set<Match<Element>> matchSet1 = elementMatch.matchElement(element1);
+        Assert.assertEquals(0, matchSet1.size());
+
+        Set<Match<Element>> matchSet2 = elementMatch.matchElement(element2);
+        Assert.assertEquals(0, matchSet2.size());
+    }
+
+    @Test
+    public void itShouldMatchTwoEqualsCivilStates(){
+        Element<Enum> element1 = getElement(CIVIL_STATE,"divorced");
+        Element<Enum> element2 = getElement(CIVIL_STATE, "divorced");
+
+        Set<Match<Element>> matchSet1 = elementMatch.matchElement(element1);
+        Assert.assertEquals(0, matchSet1.size());
+
+        Set<Match<Element>> matchSet2 = elementMatch.matchElement(element2);
+        Assert.assertEquals(1, matchSet2.size());
+        Assert.assertEquals(1.0, matchSet2.iterator().next().getResult(), 0.0);
+    }
+
+    @Test
+    public void ItShouldNotMatchTwoDifferentCivilStates(){
+        Element<Enum> element1 = getElement(CIVIL_STATE,"married");
+        Element<Enum> element2 = getElement(CIVIL_STATE, "divorced");
+
+        Set<Match<Element>> matchSet1 = elementMatch.matchElement(element1);
+        Assert.assertEquals(0, matchSet1.size());
+
+        Set<Match<Element>> matchSet2 = elementMatch.matchElement(element2);
+        Assert.assertEquals(0, matchSet2.size());
     }
     
     private Element getElement(ElementType elementType, String value) {
